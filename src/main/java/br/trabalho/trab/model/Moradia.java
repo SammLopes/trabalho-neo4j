@@ -1,4 +1,6 @@
-package bf.trabalho.trab.model;
+package br.trabalho.trab.model;
+
+import java.util.List;
 
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
