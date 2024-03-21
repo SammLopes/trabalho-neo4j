@@ -21,4 +21,20 @@ public class Inquilino {
  @Id
  @GeneratedValue
  private String id;
+
+ @NonNull
+ private String name;
+
+ @NonNull
+ private Date dtVencimentoAlugel;
+
+ @NonNull
+ private Date dtVencimentContrato;
+
+ @NonNull
+ private int valorAluguel;
+ 
+ @JsonIgnore
+ @Relationship(type = "MORA_EM", direction = Direction.OUTGOING)
+ private Moradia moradia ;
 }
