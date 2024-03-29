@@ -1,4 +1,7 @@
-package bf.trabalho.trab.model;
+package br.trabalho.trab.model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -33,10 +36,10 @@ public class Proprietario {
 
  @JsonIgnore
  @Relationship(type = "E_DONO", direction = Direction.OUTGOING)
- private List<Moradia> moradias = new ArrayList()<>;
+ private List<Moradia> moradias = new ArrayList<>();
 
  @JsonIgnore
  @Relationship(type = "AMOR_ENTERNO", direction = Direction.OUTGOING)
- private List<Inquilino> inquilinos = new ArrayList()<>;
+ private List<Inquilino> inquilinos = new ArrayList<>();
  
 }

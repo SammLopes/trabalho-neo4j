@@ -22,7 +22,7 @@ import lombok.NonNull;
 public class Inquilino {
  @Id
  @GeneratedValue
- private String id;
+ private Long  id;
 
  @NonNull
  private String name;

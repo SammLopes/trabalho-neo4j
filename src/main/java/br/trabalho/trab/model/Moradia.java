@@ -1,5 +1,6 @@
 package br.trabalho.trab.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
@@ -50,6 +51,6 @@ public class Moradia {
  
  @JsonIgnore
  @Relationship(type = "ABRIGA_EM", direction = Direction.OUTGOING)
- private List<Inquilino> inquilinos = new ArrayList()<>;
+ private List<Inquilino> inquilinos = new ArrayList<>();
  
 }
