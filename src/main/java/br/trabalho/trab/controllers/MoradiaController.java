@@ -31,27 +31,31 @@ public class MoradiaController{
 
     @GetMapping("/{id}")
     public Moradia getById(@PathVariable String id){
-        return null;
+        return service.getById(id);
     }
 
     @GetMapping("/")
     public List<Moradia> getAll(){
-        return null;
+        return service.getAll();
     }
 
     @PostMapping("/")
     public Moradia createMoradia(@RequestBody Moradia m){
-        return null;
+        return service.createMoradia(m);
     }
 
     @PutMapping("/")
     public Moradia updateMoradia(@RequestBody Moradia m){
-        return null;
+        return service.updateMoradia(m);
     }
 
     @DeleteMapping("/{id}")
-    public Moradia updateMoradia(@PathVariable String id){
-        return null;
+    public Moradia deleteMoradia(@PathVariable String id){
+    
+        Moradia m = this.service.getById(id);
+        service.deleteMoradia(id);
+        return m;
+    
     }
 
 
