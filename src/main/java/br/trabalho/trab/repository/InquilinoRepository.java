@@ -7,8 +7,7 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 
 import br.trabalho.trab.model.Inquilino;
 
-public interface InquilinoRepository extends Neo4jRepository<Inquilino, Long> {
+public interface InquilinoRepository extends Neo4jRepository<Inquilino, String> {
     Inquilino findByName(String name);
-    List<Inquilino> findByTeammatesName(String name);
     Optional<Inquilino> findById(String id);
 }

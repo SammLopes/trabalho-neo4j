@@ -83,7 +83,7 @@ public class InquilinoController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<?> findInquilinoById(@PathVariable Long id) {
+    public ResponseEntity<?> findInquilinoById(@PathVariable String id) {
         if (id == null) {
             return ResponseEntity.badRequest().body("O ID do Inquilino fornecido é nulo.");
         }

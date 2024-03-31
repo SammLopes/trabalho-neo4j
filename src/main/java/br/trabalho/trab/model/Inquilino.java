@@ -18,11 +18,11 @@ import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
-@Node
+@Node("Inquilino")
 public class Inquilino {
  @Id
  @GeneratedValue
- private Long  id;
+ private String  id;
 
  @NonNull
  private String name;

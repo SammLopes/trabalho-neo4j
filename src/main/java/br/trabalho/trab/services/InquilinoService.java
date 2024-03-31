@@ -58,7 +58,7 @@ public Inquilino findInquilinoByName(String name) {
 }
 
  @Transactional(readOnly = true)
-public Inquilino findInquilinoById(Long id) {
+public Inquilino findInquilinoById(String id) {
     return inquilinoRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Inquilino não encontrado para o ID fornecido: " + id));
 }
