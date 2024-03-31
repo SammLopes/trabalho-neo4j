@@ -19,7 +19,7 @@ import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
-@Node
+@Node("Proprietario")
 public class Proprietario {
  @Id
  @GeneratedValue
