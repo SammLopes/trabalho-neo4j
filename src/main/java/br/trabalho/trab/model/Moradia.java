@@ -19,7 +19,7 @@ import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
-@Node
+@Node("Moradia")
 public class Moradia {
  
  @Id
