@@ -23,32 +23,71 @@ public class MoradiaService{
 
     public Moradia getById(String id){
 
-        return null;
+        return moradiaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Inquilino não encontrado para o ID fornecido: " + id));
+    }
+
+
+    public List<Moradia> getAll(){
+
+        return moradiaRepository.findAll();
 
     }
 
-    public Moradia getAll(){
+    public Moradia createMoradia(Moradia m){
 
-        return null;
+        if( m != null ){
 
-    }
+            return moradiaRepository.save(m);
 
-    public Moradia crateMoradia(Moradia m){
+        }else{
 
-        return null;
+            throw new IllegalArgumentException("A moradia fornecido é inválida ou já possui um ID.");
+
+        }
 
     }
 
     public Moradia updateMoradia(Moradia m){
 
-        return null;
+        return moradiaRepository.save(m);
 
     }
 
-    public Moradia deleteMoradia(String id){
+    public void deleteMoradia(String id){
 
-        return null;
+
+        Moradia m = this.getById(id);
+
+        if (m != null) {
+
+            moradiaRepository.delete(m);
+
+        } else {
+
+            throw new IllegalArgumentException("A moradia fornecido é inválida ou já possui um ID.");
+
+        }
 
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

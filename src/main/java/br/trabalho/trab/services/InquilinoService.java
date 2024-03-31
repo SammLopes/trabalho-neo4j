@@ -12,7 +12,7 @@ import br.trabalho.trab.repository.InquilinoRepository;
 
 @Service
 public class InquilinoService {
- 
+
  private final InquilinoRepository inquilinoRepository;
 
  @Autowired
@@ -28,7 +28,7 @@ public class InquilinoService {
          throw new IllegalArgumentException("O Inquilino fornecido é inválido ou já possui um ID.");
      }
  }
- 
+
  @Transactional
  public void deleteInquilino(Inquilino inquilino) {
      if (inquilino != null && inquilino.getId() != null) {

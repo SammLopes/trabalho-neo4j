@@ -21,20 +21,20 @@ import lombok.NonNull;
 @NoArgsConstructor
 @Node("Moradia")
 public class Moradia {
- 
+
  @Id
  @GeneratedValue
  private String id;
- 
+
  @NonNull
  private String tipo;
- 
+
  @NonNull
  private String cep;
- 
+
  @NonNull
  private String endereco;
- 
+
  @NonNull
  private int numero;
 
@@ -48,9 +48,9 @@ public class Moradia {
  private int nBanheiro;
 
  private String logradouro;
- 
+
  @JsonIgnore
  @Relationship(type = "ABRIGA_EM", direction = Direction.OUTGOING)
  private List<Inquilino> inquilinos = new ArrayList<>();
- 
+
 }
