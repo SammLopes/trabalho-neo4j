@@ -6,11 +6,8 @@ import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
-import org.springframework.data.neo4j.core.schema.Relationship.Direction;
-
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,23 +17,27 @@ import lombok.NonNull;
 @NoArgsConstructor
 @Node("Inquilino")
 public class Inquilino {
- @Id
- @GeneratedValue
- private String  id;
+    @Id
+    @GeneratedValue
+    private String id;
 
- @NonNull
- private String name;
+    @NonNull
+    private String name;
 
- @NonNull
- private Date dtVencimentoAlugel;
+    @NonNull
+    private Date dtVencimentoAlugel;
 
- @NonNull
- private Date dtVencimentContrato;
+    @NonNull
+    private Date dtVencimentContrato;
 
- @NonNull
- private int valorAluguel;
- 
- @JsonIgnore
- @Relationship(type = "MORA_EM", direction = Direction.OUTGOING)
- private Moradia moradia ;
+    @NonNull
+    private int valorAluguel;
+
+    @JsonIgnore
+    @Relationship(type = "MORA_EM", direction = Relationship.Direction.OUTGOING)
+    private Moradia moradia;
+
+    @JsonIgnore
+    @Relationship(type = "E_INQUILINO", direction = Relationship.Direction.OUTGOING)
+    private Proprietario proprietario;
 }

@@ -46,4 +46,10 @@ public class ProprietarioController {
         service.deleteProprietario(id);
         return proprietario;
     }
+
+    @PostMapping("/{proprietarioId}/moradias/{moradiaId}")
+    public ResponseEntity<?> associarMoradiaAProprietario(@PathVariable String proprietarioId, @PathVariable String moradiaId) {
+        service.associarMoradiaAProprietario(moradiaId, proprietarioId);
+        return ResponseEntity.ok().build();
+    }
 }
