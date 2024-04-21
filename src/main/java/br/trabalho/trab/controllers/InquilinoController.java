@@ -31,7 +31,6 @@ public class InquilinoController {
         if (inquilino == null) {
             return ResponseEntity.badRequest().body("O Inquilino fornecido é nulo.");
         }
-
         try {
             Inquilino createdInquilino = inquilinoService.createInquilino(inquilino);
             return ResponseEntity.ok(createdInquilino);
@@ -82,19 +81,6 @@ public class InquilinoController {
         }
     }
 
-    @GetMapping("/id/{id}")
-    public ResponseEntity<?> findInquilinoById(@PathVariable String id) {
-        if (id == null) {
-            return ResponseEntity.badRequest().body("O ID do Inquilino fornecido é nulo.");
-        }
-
-        try {
-            Inquilino foundInquilino = inquilinoService.findInquilinoById(id);
-            return ResponseEntity.ok(foundInquilino);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
 
     @GetMapping("/todos")
     public ResponseEntity<?> getAllInquilinos() {
