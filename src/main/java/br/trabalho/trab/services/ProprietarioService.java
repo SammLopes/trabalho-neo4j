@@ -1,49 +1,48 @@
 package br.trabalho.trab.services;
 
-
-import java.util.List;
-
+import br.trabalho.trab.model.Proprietario;
+import br.trabalho.trab.repository.ProprietarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import br.trabalho.trab.model.Proprietario;
-import br.trabalho.trab.model.Moradia;
-import br.trabalho.trab.repository.ProprietarioRepository;
-
+import java.util.List;
 
 @Service
-public class ProprietarioService{
+public class ProprietarioService {
 
     private final ProprietarioRepository proprietarioRepository;
 
     @Autowired
     public ProprietarioService(ProprietarioRepository proprietarioRepository) {
-
         this.proprietarioRepository = proprietarioRepository;
-
     }
 
-    public Proprietario createProprietario(Proprietario p){
-        return null;
+    public Proprietario getById(String id) {
+        return proprietarioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Proprietário não encontrado para o ID fornecido: " + id));
     }
 
-    public Proprietario deleteProprietario(String id){
-        return null;
+    public List<Proprietario> getAll() {
+        return proprietarioRepository.findAll();
     }
 
-    public Proprietario getById(String id){
-        return null;
+    public Proprietario createProprietario(Proprietario proprietario) {
+        if (proprietario != null) {
+            return proprietarioRepository.save(proprietario);
+        } else {
+            throw new IllegalArgumentException("O proprietário fornecido é inválido.");
+        }
     }
 
-    public Proprietario getAll(String id){
-        return null;
+    public Proprietario updateProprietario(Proprietario proprietario) {
+        return proprietarioRepository.save(proprietario);
     }
 
-    public Proprietario updateProprietario(Proprietario p){
-        return null;
+    public void deleteProprietario(String id) {
+        Proprietario proprietario = this.getById(id);
+        if (proprietario != null) {
+            proprietarioRepository.delete(proprietario);
+        } else {
+            throw new IllegalArgumentException("O proprietário fornecido é inválido.");
+        }
     }
-
-
 }
-
