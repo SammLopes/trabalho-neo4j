@@ -22,35 +22,46 @@ import lombok.NonNull;
 @Node("Moradia")
 public class Moradia {
 
- @Id
- @GeneratedValue
- private String id;
+    @Id
+    @GeneratedValue
+    private String id;
 
- @NonNull
- private String tipo;
+    @NonNull
+    private String tipo;
 
- @NonNull
- private String cep;
+    @NonNull
+    private String cep;
 
- @NonNull
- private String endereco;
+    @NonNull
+    private String endereco;
 
- @NonNull
- private int numero;
+    @NonNull
+    private int numero;
 
- @NonNull
- private int area;
+    @NonNull
+    private int area;
 
- @NonNull
- private int nQuartos;
+    @NonNull
+    private int nQuartos;
 
- @NonNull
- private int nBanheiro;
+    @NonNull
+    private int nBanheiro;
 
- private String logradouro;
+    private String logradouro;
 
- @JsonIgnore
- @Relationship(type = "ABRIGA_EM", direction = Direction.OUTGOING)
- private List<Inquilino> inquilinos = new ArrayList<>();
+    @JsonIgnore
+    @Relationship(type = "ABRIGA_EM", direction = Direction.OUTGOING)
+    private List<Inquilino> inquilinos = new ArrayList<>();
 
+    @JsonIgnore
+    @Relationship(type = "PERTENCE_AO_PROPRIETARIO", direction = Direction.OUTGOING)
+    private Proprietario proprietario;
+
+    public void addInquilino(Inquilino inquilino) {
+        this.inquilinos.add(inquilino);
+    }
+
+    public void setProprietario(Proprietario proprietario) {
+        this.proprietario = proprietario;
+    }
 }

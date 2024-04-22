@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.net.http.HttpResponse.ResponseInfo;
 import java.util.List;
 
+import br.trabalho.trab.model.Inquilino;
 import br.trabalho.trab.model.Moradia;
 import br.trabalho.trab.services.MoradiaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -125,6 +129,18 @@ public class MoradiaController{
         }
 
 
+    }
+
+    @PostMapping("/{moradiaId}/inquilinos")
+    public ResponseEntity<?> associarInquilinoAMoradia(@PathVariable String moradiaId, @RequestBody Inquilino inquilino) {
+        service.associarInquilinoAMoradia(moradiaId, inquilino);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{moradiaId}/proprietarios/{proprietarioId}")
+    public ResponseEntity<?> associarMoradiaAProprietario(@PathVariable String moradiaId, @PathVariable String proprietarioId) {
+        service.associarMoradiaAProprietario(moradiaId, proprietarioId);
+        return ResponseEntity.ok().build();
     }
 
 

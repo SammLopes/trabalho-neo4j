@@ -1,6 +1,8 @@
 package br.trabalho.trab.services;
 
+import br.trabalho.trab.model.Moradia;
 import br.trabalho.trab.model.Proprietario;
+import br.trabalho.trab.repository.MoradiaRepository;
 import br.trabalho.trab.repository.ProprietarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,12 +12,14 @@ import java.util.List;
 public class ProprietarioService {
 
     private final ProprietarioRepository proprietarioRepository;
-
+    private final MoradiaRepository moradiaRepository;
+    
     @Autowired
-    public ProprietarioService(ProprietarioRepository proprietarioRepository) {
+    public ProprietarioService(ProprietarioRepository proprietarioRepository, MoradiaRepository moradiaRepository) {
         this.proprietarioRepository = proprietarioRepository;
+        this.moradiaRepository = moradiaRepository;
     }
-
+    
     public Proprietario getById(String id) {
         return proprietarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Proprietário não encontrado para o ID fornecido: " + id));
@@ -44,5 +48,16 @@ public class ProprietarioService {
         } else {
             throw new IllegalArgumentException("O proprietário fornecido é inválido.");
         }
+    }
+
+    public void associarMoradiaAProprietario(String moradiaId, String proprietarioId) {
+        Moradia moradia = moradiaRepository.findById(moradiaId)
+                .orElseThrow(() -> new IllegalArgumentException("Moradia não encontrada para o ID fornecido: " + moradiaId));
+
+        Proprietario proprietario = proprietarioRepository.findById(proprietarioId)
+                .orElseThrow(() -> new IllegalArgumentException("Proprietário não encontrado para o ID fornecido: " + proprietarioId));
+
+        proprietario.addMoradia(moradia);
+        proprietarioRepository.save(proprietario);
     }
 }
