@@ -1,6 +1,7 @@
 package br.trabalho.trab.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,42 +23,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/moradias")
-public class MoradiaController{
+public class MoradiaController {
 
     private final MoradiaService service;
 
     @Autowired
-    public MoradiaController(MoradiaService service){
+    public MoradiaController(MoradiaService service) {
         this.service = service;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable String id){
+    public ResponseEntity<?> getById(@PathVariable String id) {
 
-        if(id != null){
+        if (id != null) {
 
-            Moradia m =  service.getById(id);
+            Moradia m = service.getById(id);
             return ResponseEntity.ok(m);
 
-        }else{
+        } else {
 
             return ResponseEntity.badRequest().body("O ID da Moradia fornecido é invalido.");
 
         }
 
-
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> getAll(){
-        
+    public ResponseEntity<?> getAll() {
+
         try {
-            
+
             return ResponseEntity.ok(service.getAll());
-            
+
         } catch (Exception e) {
 
             return ResponseEntity.badRequest().body("Não existe Moradias cadastradas");
@@ -66,20 +66,20 @@ public class MoradiaController{
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> createMoradia(@RequestBody Moradia m){
-        
-        if( m == null){
+    public ResponseEntity<?> createMoradia(@RequestBody Moradia m) {
+
+        if (m == null) {
 
             return ResponseEntity.badRequest().body("Moradia inválida");
-        
+
         }
 
         try {
 
-            return ResponseEntity.ok(service.createMoradia(m));    
-        
+            return ResponseEntity.ok(service.createMoradia(m));
+
         } catch (Exception e) {
-        
+
             return ResponseEntity.badRequest().body(e.getMessage());
 
         }
@@ -87,20 +87,20 @@ public class MoradiaController{
     }
 
     @PutMapping("/")
-    public ResponseEntity<?> updateMoradia(@RequestBody Moradia m){
-       
-        if( m == null){
+    public ResponseEntity<?> updateMoradia(@RequestBody Moradia m) {
+
+        if (m == null) {
 
             return ResponseEntity.badRequest().body("Moradia inválida");
-        
+
         }
 
         try {
 
-            return ResponseEntity.ok(service.updateMoradia(m));    
-        
+            return ResponseEntity.ok(service.updateMoradia(m));
+
         } catch (Exception e) {
-        
+
             return ResponseEntity.badRequest().body(e.getMessage());
 
         }
@@ -108,9 +108,9 @@ public class MoradiaController{
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteMoradia(@PathVariable String id){
+    public ResponseEntity<?> deleteMoradia(@PathVariable String id) {
 
-        if(id == null){
+        if (id == null) {
 
             return ResponseEntity.badRequest().body("ID invalido ");
 
@@ -121,27 +121,29 @@ public class MoradiaController{
             Moradia m = this.service.getById(id);
             service.deleteMoradia(id);
             return ResponseEntity.ok(m);
-            
+
         } catch (Exception e) {
 
             return ResponseEntity.badRequest().body(e.getMessage());
 
         }
 
-
     }
 
-    @PostMapping("/{moradiaId}/inquilinos")
-    public ResponseEntity<?> associarInquilinoAMoradia(@PathVariable String moradiaId, @RequestBody Inquilino inquilino) {
-        service.associarInquilinoAMoradia(moradiaId, inquilino);
-        return ResponseEntity.ok().build();
+    @PostMapping("/{inquilinoId}/moradias/{moradiaId}")
+    public ResponseEntity<?> associarInquilinoAMoradia(@PathVariable String inquilinoId, @PathVariable String moradiaId) {
+        
+        try {
+            if (inquilinoId != null && moradiaId != null) {
+                service.associarInquilinoAMoradia(moradiaId, inquilinoId);
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ID inválido");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        
     }
-
-    @PutMapping("/{moradiaId}/proprietarios/{proprietarioId}")
-    public ResponseEntity<?> associarMoradiaAProprietario(@PathVariable String moradiaId, @PathVariable String proprietarioId) {
-        service.associarMoradiaAProprietario(moradiaId, proprietarioId);
-        return ResponseEntity.ok().build();
-    }
-
 
 }

@@ -50,18 +50,10 @@ public class Moradia {
     private String logradouro;
 
     @JsonIgnore
-    @Relationship(type = "ABRIGA_EM", direction = Direction.OUTGOING)
+    @Relationship(type = "SEM_TETO", direction = Direction.OUTGOING)
     private List<Inquilino> inquilinos = new ArrayList<>();
 
     @JsonIgnore
     @Relationship(type = "PERTENCE_AO_PROPRIETARIO", direction = Direction.OUTGOING)
     private Proprietario proprietario;
-
-    public void addInquilino(Inquilino inquilino) {
-        this.inquilinos.add(inquilino);
-    }
-
-    public void setProprietario(Proprietario proprietario) {
-        this.proprietario = proprietario;
-    }
 }
