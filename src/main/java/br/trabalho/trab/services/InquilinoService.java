@@ -22,6 +22,7 @@ public class InquilinoService {
 
  
  public Inquilino createInquilino(Inquilino inquilino) {
+     
      if (inquilino != null && inquilino.getId() == null) {
          return inquilinoRepository.save(inquilino); // Salva o inquilino no banco de dados
      } else {

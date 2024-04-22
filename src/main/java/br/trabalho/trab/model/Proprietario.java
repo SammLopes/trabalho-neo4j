@@ -19,33 +19,25 @@ import lombok.NonNull;
 @NoArgsConstructor
 @Node("Proprietario")
 public class Proprietario {
-    @Id
-    @GeneratedValue
-    private String id;
+ @Id
+ @GeneratedValue
+ private String id;
 
-    @NonNull
-    private String name;
+ @NonNull
+ private String name;
 
-    @NonNull
-    private int celular;
+ @NonNull
+ private String celular;
 
-    @NonNull
-    private String cpf;
+ @NonNull
+ private String cpf;
 
-    @JsonIgnore
-    @Relationship(type = "E_DONO", direction = Direction.OUTGOING)
-    private List<Moradia> moradias = new ArrayList<>();
+ @JsonIgnore
+ @Relationship(type = "E_DONO", direction = Direction.OUTGOING)
+ private List<Moradia> moradias = new ArrayList<>();
 
-    @JsonIgnore
-    @Relationship(type = "AMOR_ENTERNO", direction = Direction.OUTGOING)
-    private List<Inquilino> inquilinos = new ArrayList<>();
-
-    // Método para adicionar uma moradia ao proprietário
-    public void addMoradia(Moradia moradia) {
-        this.moradias.add(moradia);
-    }
-    
-    public void addInquilino(Inquilino inquilino) {
-        this.inquilinos.add(inquilino);
-    }
+ @JsonIgnore
+ @Relationship(type = "AMOR_ENTERNO", direction = Direction.OUTGOING)
+ private List<Inquilino> inquilinos = new ArrayList<>();
+ 
 }
