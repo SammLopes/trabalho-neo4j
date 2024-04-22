@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.http.HttpStatus;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -49,7 +50,19 @@ public class ProprietarioController {
 
     @PostMapping("/{proprietarioId}/moradias/{moradiaId}")
     public ResponseEntity<?> associarMoradiaAProprietario(@PathVariable String proprietarioId, @PathVariable String moradiaId) {
-        service.associarMoradiaAProprietario(moradiaId, proprietarioId);
-        return ResponseEntity.ok().build();
+        
+            try {
+                if( proprietarioId != null &&  moradiaId != null){
+                    service.associarMoradiaAProprietario(moradiaId, proprietarioId);
+                    return ResponseEntity.ok().build();    
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id Inválido");
+                }
+            } catch (Exception e) {
+                
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( e.getMessage());
+            }
+        
+        
     }
 }

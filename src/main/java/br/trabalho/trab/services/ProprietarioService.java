@@ -51,13 +51,21 @@ public class ProprietarioService {
     }
 
     public void associarMoradiaAProprietario(String moradiaId, String proprietarioId) {
+        
         Moradia moradia = moradiaRepository.findById(moradiaId)
                 .orElseThrow(() -> new IllegalArgumentException("Moradia não encontrada para o ID fornecido: " + moradiaId));
 
+        System.out.println("id prop "+proprietarioId);
         Proprietario proprietario = proprietarioRepository.findById(proprietarioId)
                 .orElseThrow(() -> new IllegalArgumentException("Proprietário não encontrado para o ID fornecido: " + proprietarioId));
 
-        proprietario.addMoradia(moradia);
-        proprietarioRepository.save(proprietario);
+        //proprietario.addMoradia(moradia);
+        try {
+            proprietario.getMoradias().add(moradia);
+            proprietarioRepository.save(proprietario);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("O proprietário fornecido é inválido.");
+        }
+        
     }
 }
