@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -49,20 +51,35 @@ public class ProprietarioController {
     }
 
     @PostMapping("/{proprietarioId}/moradias/{moradiaId}")
-    public ResponseEntity<?> associarMoradiaAProprietario(@PathVariable String proprietarioId, @PathVariable String moradiaId) {
-        
-            try {
-                if( proprietarioId != null &&  moradiaId != null){
-                    service.associarMoradiaAProprietario(moradiaId, proprietarioId);
-                    return ResponseEntity.ok().build();    
-                } else {
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id Inválido");
-                }
-            } catch (Exception e) {
-                
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( e.getMessage());
+    public ResponseEntity<?> associarMoradiaAProprietario(@PathVariable String proprietarioId,
+            @PathVariable String moradiaId) {
+
+        try {
+            if (proprietarioId != null && moradiaId != null) {
+                service.associarMoradiaAProprietario(moradiaId, proprietarioId);
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id Inválido");
             }
-        
-        
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
+
+    @PostMapping("/{proprietarioId}/inquilinos/{inquilinoId}")
+    public ResponseEntity<String> associarIquilinoAProprietario(@PathVariable String proprietarioId,
+            @PathVariable String inquilinoId) {
+        try {
+            if (proprietarioId != null && inquilinoId != null) {
+                service.AMOR_ENTERNO(proprietarioId, inquilinoId);
+                return ResponseEntity.ok("Inquilino associado ao proprietario com sucesso");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id Inválido");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 }
